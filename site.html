@@ -11,7 +11,7 @@
 </head>
 <body>
 <main>
-  <header><span class="brand">XUXU0927 / NOTES</span><nav aria-label="导航"><a href="https://github.com/Xuxu0927/docs">GitHub</a><button type="button" id="language" aria-label="Switch to English">English</button></nav></header>
+  <header><span class="brand">XUXU0927 / NOTES</span><nav aria-label="导航"><a id="admin-link" href="admin/">管理</a><a href="https://github.com/Xuxu0927/docs">GitHub</a><button type="button" id="language" aria-label="Switch to English">English</button></nav></header>
   <h1 id="heading">学习笔记</h1>
   <p id="intro">中英文笔记与资料，点击 MD / PDF 下载。</p>
   <div class="table-wrap" tabindex="0" role="region" aria-label="笔记目录">
@@ -30,6 +30,7 @@ const copy = {
 };
 function render(){
  const t=copy[language];document.documentElement.lang=language==='zh'?'zh-CN':'en';document.title=t.title+' · Xuxu0927';
+ document.getElementById('admin-link').textContent=language==='zh'?'管理':'Manage';
  for(const [id,value] of Object.entries({heading:t.title,intro:t.intro,caption:t.caption,footer:t.footer(notes.length)}))document.getElementById(id).textContent=value;
  document.querySelector('nav').setAttribute('aria-label',language==='zh'?'导航':'Navigation');document.querySelector('.table-wrap').setAttribute('aria-label',t.caption);
  const button=document.getElementById('language');button.textContent=language==='zh'?'English':'简体中文';button.setAttribute('aria-label',language==='zh'?'Switch to English':'切换为简体中文');

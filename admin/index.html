@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>笔记管理 · Xuxu0927</title><link rel="stylesheet" href="./admin.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <header class="topbar"><div class="topbar-inner"><a class="brand" href="../">XUXU0927 <span>/ NOTES</span></a><nav aria-label="导航"><a href="../">查看网站 ↗</a><a href="https://github.com/Xuxu0927/docs" target="_blank" rel="noopener noreferrer">GitHub ↗</a><button id="disconnect" class="quiet" hidden>断开连接</button></nav></div></header>
+  <main>
+    <div class="page-heading"><div><span class="eyebrow">YOUR PERSONAL LIBRARY</span><h1>笔记管理</h1><p>上传资料，整理目录，让每一篇笔记都有处可寻。</p></div><span class="repo-badge">Xuxu0927 / docs</span></div>
+    <div id="status" class="status" role="status" aria-live="polite">连接仓库后，即可开始管理笔记。</div>
+    <section id="connection" class="connection card" aria-labelledby="connection-title">
+      <div><span class="step">01 / 连接仓库</span><h2 id="connection-title">先连接你的 GitHub</h2><p>使用仅授权 <strong>docs</strong> 仓库的令牌。令牌只在当前页面中使用，刷新或关闭页面后需重新输入。</p>
+      <form id="connect-form"><label for="token">GitHub 访问令牌</label><div class="connect-controls"><input id="token" type="password" required autocomplete="off" spellcheck="false" placeholder="github_pat_…" aria-describedby="token-help"><button class="primary" id="connect" type="submit">连接仓库</button></div><small id="token-help">令牌只发送给 GitHub，不会存入仓库或浏览器存储。</small></form></div>
+      <details open><summary>第一次使用？按这 3 步创建令牌</summary><ol><li>打开 <a href="https://github.com/settings/personal-access-tokens/new?name=Notes%20Manager&target_name=Xuxu0927&contents=write" target="_blank" rel="noopener noreferrer">GitHub 令牌设置 ↗</a>，设置名称和有效期。</li><li>Resource owner 选 <strong>Xuxu0927</strong>；Repository access 选 <strong>Only select repositories → docs</strong>。</li><li>Repository permissions 中，将 <strong>Contents</strong> 设为 <strong>Read and write</strong>，生成后复制到左侧。</li></ol><p class="small">这里只需要仓库内容权限。令牌过期后，重新创建即可。</p></details>
+    </section>
+    <section id="workspace" hidden aria-label="笔记编辑工作区">
+      <div class="publish-bar card"><div><strong id="summary">0 篇笔记</strong><span id="pending" class="muted">尚无待发布更改</span></div><div class="actions"><button id="reload" class="quiet">重新加载</button><button id="backup" class="quiet">备份草稿</button><label class="button quiet" for="restore">恢复草稿<input id="restore" type="file" accept=".json,application/json" class="visually-hidden"></label><button id="publish" class="primary">发布更新 ↗</button></div></div>
+      <div class="workspace-grid">
+        <aside class="card list-panel"><div class="panel-heading"><h2>笔记目录</h2><button id="new" class="quiet">＋ 新增</button></div><p class="small muted">列表顺序就是网站表格顺序。</p><div id="note-list"></div></aside>
+        <section class="card editor" aria-labelledby="editor-title">
+          <div class="panel-heading"><div><span class="step">02 / 整理内容</span><h2 id="editor-title">新增笔记</h2></div><span id="editor-mode" class="pill">未保存</span></div>
+          <form id="note-form">
+            <div class="title-grid"><div><label for="title-zh">中文标题 <span class="required">*</span></label><input id="title-zh" maxlength="200" required placeholder="例如：深度学习基础"></div><div><label for="title-en">英文标题 <span class="optional">选填</span></label><input id="title-en" maxlength="200" placeholder="留空时沿用中文标题"></div></div>
+            <div class="section-label"><h3>文档资料</h3><span class="small muted">单个文件 ≤ 20 MB · 一次发布 ≤ 40 MB</span></div>
+            <div class="upload-grid" id="upload-grid"></div>
+            <p class="small muted">不必一次上传全部版本，缺少的版本会显示“待补充”。这里只接收已有 MD / PDF 文件，不会自动翻译或转换格式。</p>
+            <div class="editor-footer"><span class="small muted">保存后还需点击顶部“发布更新”。</span><button id="save-note" type="submit" class="secondary">保存到待发布列表</button></div>
+          </form>
+        </section>
+      </div>
+      <section class="preview card" aria-labelledby="preview-title"><div class="panel-heading"><h2 id="preview-title">目录预览</h2><span class="small muted">中文首页 · 未发布</span></div><div class="table-scroll"><table><thead><tr><th>序号</th><th>主题</th><th>中文 Markdown</th><th>英文 Markdown</th><th>中文 PDF</th><th>英文 PDF</th></tr></thead><tbody id="preview-body"></tbody></table></div></section>
+    </section>
+    <footer>文档保存在你的 GitHub 仓库 · <a href="../GUIDE.md">使用说明</a></footer>
+    <noscript>请启用 JavaScript 后使用在线管理功能。</noscript>
+  </main>
+</body>
+</html>

@@ -3,6 +3,12 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+
+def table_text(value):
+    for before, after in (('&', '&amp;'), ('<', '&lt;'), ('>', '&gt;'), ('|', '&#124;'), ('[', '&#91;'), (']', '&#93;'), ('\r', ' '), ('\n', ' ')):
+        value = value.replace(before, after)
+    return value
+
 notes = json.loads((ROOT / 'notes.json').read_text(encoding='utf-8'))
 if not isinstance(notes, list):
     raise ValueError('notes.json must contain a list')
@@ -30,7 +36,7 @@ for lang, filename, title, intro, headers in (
     lines = [f'# {title}', '', toggle, '', intro, '', '| ' + ' | '.join(headers) + ' |', '|---|---|---|---|---|---|']
     from urllib.parse import quote
     for i, note in enumerate(notes, 1):
-        cells = [str(i), note['title'][lang].replace('|', '&#124;').replace('\n', ' ')]
+        cells = [str(i), table_text(note['title'][lang])]
         for key in ('md_zh', 'md_en', 'pdf_zh', 'pdf_en'):
             path = note.get(key)
             label = 'MD' if key.startswith('md') else 'PDF'
