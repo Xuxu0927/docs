@@ -1,24 +1,15 @@
-# 使用说明 / Publishing guide
+# 更新笔记
 
-## 首次开启网站
+网站直接读取 `notes.json`，无需运行命令或使用后台。
 
-进入仓库 **Settings → Pages**，在 **Build and deployment → Source** 选择 **Deploy from a branch**，选择 **main** 和 **/ (root)**，点击 **Save**。
-
-等待 GitHub 完成部署后，页面会显示网站地址，预期为 `https://xuxu0927.github.io/docs/`。
-
-仓库首页无需开启 Pages 即可查看。中文为默认语言，英文版本通过顶部链接切换。
-
-## 添加自己的笔记
-
-1. 中文 Markdown 放在 `md/zh/`，英文 Markdown 放在 `md/en/`。
-2. 中文 PDF 放在 `pdf/zh/`，英文 PDF 放在 `pdf/en/`。
-3. 在 `notes.json` 数组中增加一条记录（以下只是格式示例，目前目录为空）：
+1. 在 GitHub 仓库上传文件：中文 MD → `md/zh/`，英文 MD → `md/en/`；中文 PDF → `pdf/zh/`，英文 PDF → `pdf/en/`。
+2. 编辑 `notes.json`，增加一条记录并提交：
 
 ```json
 [
   {
-    "title": { "zh": "我的第一篇笔记", "en": "My First Note" },
-    "md_zh": "md/zh/first-note.md",
+    "title": { "zh": "我的笔记", "en": "My Notes" },
+    "md_zh": "md/zh/my-notes.md",
     "md_en": null,
     "pdf_zh": null,
     "pdf_en": null
@@ -26,18 +17,18 @@
 ]
 ```
 
-尚未上传的版本使用 `null`，页面会显示“待补充”。路径必须对应实际存在的文件。
+没有的版本填 `null`，表格显示 `—`。多条记录用逗号分隔，排列顺序就是表格顺序。
 
-4. 在本地仓库文件夹运行 `python tools/build.py`，自动更新网站和中英文首页，然后将这些变更一起上传到 GitHub。目录顺序就是表格顺序，序号自动生成。
+3. 等待 GitHub Pages 部署完成，刷新网站即可。
 
-网站表格中的 MD / PDF 链接直接下载对应文件；仓库首页中的链接可用于预览。中英文内容需分别编写或上传。
+- 修改文件内容：在 GitHub 编辑或替换同一路径的文件，下载内容随部署更新。
+- 修改主题标题、增删条目或调整顺序：编辑 `notes.json`。
+- 修改网页外观或页标题：直接编辑 `index.html`（语言切换时的文字在 `notes.js`）。
 
-## 修改外观
+新增文件不会自动被收录到目录，需在 `notes.json` 填写路径。
 
-编辑 `site.html` 后重新运行 `python tools/build.py`。不要直接修改生成的 `index.html`、`README.md` 或 `README.en.md`，否则下次生成会覆盖修改。
+仓库 README 与网站目录独立。如需同步 README，可选在本地运行 `python tools/build.py` 后提交生成的文件；不影响网站更新。
 
-## English
+# English
 
-Enable **Settings → Pages → Deploy from a branch → main → / (root)** to publish the website. Chinese is the default; use the language button for English.
-
-Upload your Markdown/PDF files into the language folders and add entries to `notes.json`. Use `null` for versions not yet available. Run `python tools/build.py` and upload all changed files. This updates the website and both repository homepages from the same catalog.
+Upload Markdown/PDF files to the matching language folders, edit `notes.json`, and commit. Once GitHub Pages finishes deploying, refresh the website. Editing an existing document updates its download without changing the catalog. No local build or token is needed to update the website through GitHub.
