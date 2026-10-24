@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "category": { "zh": "基础知识", "en": "Fundamentals" },
+    "title": { "zh": "Markdown 入门", "en": "Markdown Basics" },
+    "md_zh": "md/zh/markdown-basics.md",
+    "md_en": "md/en/markdown-basics.md",
+    "pdf_zh": null,
+    "pdf_en": null
+  },
+  {
+    "category": { "zh": "实践记录", "en": "Practice" },
+    "title": { "zh": "在 GitHub 更新笔记", "en": "Updating Notes on GitHub" },
+    "md_zh": "md/zh/github-updates.md",
+    "md_en": "md/en/github-updates.md",
+    "pdf_zh": null,
+    "pdf_en": null
+  }
+]
