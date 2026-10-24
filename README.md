@@ -1,8 +1,6 @@
 # 学习笔记
 
-**简体中文** | [English](README.en.md)
-
-网站https://xuxu0927.github.io/docs/
+**简体中文** | [English](README.en.md)    网站https://xuxu0927.github.io/docs/
 
 ## 通信
 
