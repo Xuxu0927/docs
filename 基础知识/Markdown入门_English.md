@@ -28,4 +28,4 @@ print(message)
 
 ## Website entry
 
-The root `notes.json` file connects this document to a title and category. Editing this document updates the download. Editing `title` or `category` in the catalog changes the website listing. Use `null` for a missing PDF version.
+Edit the root README.md to change the website title, category headings and topic names. Both language versions and any PDFs live directly in the Fundamentals category folder. No JSON or build command is needed.
